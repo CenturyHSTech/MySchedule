@@ -39,22 +39,21 @@ Getting your project up and running in VS Code.
 ## Coding Your Project
 Once the environment is set up, and you're ready to code...
 
-1. If you have any of your project files in another folder, copy the files and paste in the `project` folder.
-2. If you are starting from scratch, create a file named `index.html` in the `project` folder.
-3. Follow teacher instructions on creating your web page.
-4. Be sure to name your file in the title tag as well as in the body with an `h1` tag.
-5. Read the [list of required elements](#required-elements) to make sure you meet minimum requirements.
-6. Add your three sections: About Me, My Favorites, and My Schedule
-7. Make sure each section has a section title using the `h2` element.
-8. **In the *About Me* section...**
+1. Create a file named `index.html` in the `project` folder.
+2. Follow teacher instructions on creating your web page.
+3. Be sure to name your file in the title tag as well as in the body with an `h1` tag.
+4. Read the [list of required elements](#required-elements) to make sure you meet minimum requirements.
+4. Create an html table using the `table` tag.
+5. Make sure each section has a section title using the `h2` element.
+7. **In the *About Me* section...**
     * add at least 3 paragraphs using the `p` tag.
     * Add some text formatting.
     * Optionally, you may wish to work a link or two into your paragraphs (just know that you do need at least 2 links).
-9.  **In the *My Favorites* section...**
+8.  **In the *My Favorites* section...**
     * Add an introductory paragraph about your favorites.
     * Add one or more lists (bullet or numbered).
     * For each list, include at least 3 list items (`li`)
-10. You may leave the ***My Schedule*** empty for now, but just know that you will be adding a table.
+9. You may leave the ***My Schedule*** empty for now, but just know that you will be adding a table.
 
 *NOTE: as you are codign your page, be sure to check your page for errors using the [W3C File Upload Validator](https://validator.w3.org/#validate_by_upload)*
 
@@ -69,20 +68,22 @@ Once the environment is set up, and you're ready to code...
     - `head`
     - `title`
 * Other required tags (see minimum #)
-    - `h1` -> one per page (ONLY)
-    - `h2` -> at least 3 per page
-    - `p`  -> at least 4 per page
-    - `a`  -> at least 2 per page
-* Formatting Elements
-    - `strong` or `b` -> at least 2 per page (you can choose which one)
-    - `em` or `i`     -> at least 2 per page (you choose which one)
-
-### Minimum List Requirements
-* At least 1 list (you can choose between `ol` or `ul`)
-* At least 3 list items per list
+    - `h1` -> one
+    - `h2` -> two
+    - `table` -> two
+    - `tr`  -> at least 6 per table (one for the header, and one for each period)
+    - `th`  -> at least 4 per table (in the first `tr`)
+    - `td` -> at least 16 per table (4 for each `tr` after the 1st.) 
 
 ### Validity Requirements
 * No HTML errors are allowed
+
+### CSS Requirements
+* Colors:
+    - Apply a background color to the page (through the body or html)
+    - Apply a color to the text (through the body)
+    - Apply a color to hyperlinks (to both the link and visited - hover is optional)
+    - 
 
 NOTE: to check for errors, be sure to upload your HTML file to the [W3C File Upload Validator](https://validator.w3.org/#validate_by_upload)
 
