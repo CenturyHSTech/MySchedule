@@ -1,5 +1,5 @@
-# About Me Page HTML Part 1 Project
-Demonstrate that you are able to write and organize content for a single web page that contains a variety of HTML to display a title, section headers, paragraphs, links, text formatting, and lists.
+# MySchedule
+Demonstrate your ability to mark up and style tables.
 
 ***NOTE: this is part 1 of an on-going project***
 
