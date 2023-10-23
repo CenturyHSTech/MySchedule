@@ -161,3 +161,6 @@ cython_debug/
 
 # MacOS
 .DS_Store
+
+# My own test file (don't want to reveal to students)
+project/wiliwonka.html
