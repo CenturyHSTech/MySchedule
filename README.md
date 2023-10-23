@@ -42,18 +42,34 @@ Once the environment is set up, and you're ready to code...
 1. Create a file named `index.html` in the `project` folder.
 2. Follow teacher instructions on creating your web page.
 3. Be sure to name your file in the title tag as well as in the body with an `h1` tag.
-4. Read the [list of required elements](#required-elements) to make sure you meet minimum requirements.
-4. Create an html table using the `table` tag.
-5. Make sure each section has a section title using the `h2` element.
-7. **In the *About Me* section...**
-    * add at least 3 paragraphs using the `p` tag.
-    * Add some text formatting.
-    * Optionally, you may wish to work a link or two into your paragraphs (just know that you do need at least 2 links).
-8.  **In the *My Favorites* section...**
-    * Add an introductory paragraph about your favorites.
-    * Add one or more lists (bullet or numbered).
-    * For each list, include at least 3 list items (`li`)
-9. You may leave the ***My Schedule*** empty for now, but just know that you will be adding a table.
+4. Be sure to include all required tags for any web page (see the [list of required elements](#required-elements) to make sure you meet minimum requirements).
+5. Create and label two tables for your page:
+    * One table for your A day schedule
+    * One table for your B day schedule
+6. When creating a label for your table, you may choose one of two options:
+    1. you could put an `h2` before the `table` tag 
+       OR
+    2. you could put the label in the `thead` tag
+        * If you choose to use the `thead` tag, you must also use the `tbody` tag.
+7. For each table, make sure you meet the following requirements:
+    * You must have column headers using the `th` tag.
+    * You must have 4 columns: period, class, teacher, and room
+    * You must have at least 6 rows:
+        - one for the headers
+        - one for each of the 4 periods in a day
+        - one for lunch
+    * The lunch row should merge across all of the columns.
+    * You provide a border around...
+        - the table itself
+        - each cell
+    * You provide a different background color and color for the table than the entire page.
+    * You provide a different background color and color for the table headers.
+    * Any additional colors are optional, but when applied, they must meet color contrast requirements.
+    * You provide a border around the table and around each row &/or cell.
+    * All cells and headers have padding applied.
+    * No matter what styles you provide...
+        - ***everything must be readable***
+        - ***no text should be touching a border or edge of the screen***
 
 *NOTE: as you are codign your page, be sure to check your page for errors using the [W3C File Upload Validator](https://validator.w3.org/#validate_by_upload)*
 
@@ -80,10 +96,21 @@ Once the environment is set up, and you're ready to code...
 
 ### CSS Requirements
 * Colors:
-    - Apply a background color to the page (through the body or html)
-    - Apply a color to the text (through the body)
-    - Apply a color to hyperlinks (to both the link and visited - hover is optional)
-    - 
+    - ALL COLORS must meet [WebAIM color contrast](https://webaim.org/resources/contrastchecker/) goals at the following levels:
+        * Headings must at least meet ***"WCAG AA"*** rating
+        * Body text (table content and links included) must meet ***"WCAG AAA"*** rating
+    - Apply a **background color** to the page (through the body or html)
+    - Apply a **color** to the text (through the body)
+    - Apply a **color** to hyperlinks (to both the link and visited - hover is optional)
+    - Apply a **background color AND color** to one or more of the following elements: 
+        * `table`, 
+        * `tr`, OR
+        * `th` and `td` (NOTE: if set it on one of these, you MUST set it on both)
+    - Apply a **styled border** around the table
+    - Apply a **thinner border** around the cells
+    - Style the `th` elements differently from the `td` elements
+    - Add **padding** to all `th` and `td` elements.
+    - [OPTIONAL] add border-collapse to remove the gaps between borders (it almost always looks better)
 
 NOTE: to check for errors, be sure to upload your HTML file to the [W3C File Upload Validator](https://validator.w3.org/#validate_by_upload)
 
