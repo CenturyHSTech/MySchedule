@@ -49,8 +49,7 @@ Once the environment is set up, and you're ready to code...
 6. When creating a label for your table, you may choose one of two options:
     1. you could put an `h2` before the `table` tag 
        OR
-    2. you could put the label in the `thead` tag
-        * If you choose to use the `thead` tag, you must also use the `tbody` tag.
+    2. you could put the label in the `caption` tag
 7. For each table, make sure you meet the following requirements:
     * You must have column headers using the `th` tag.
     * You must have 4 columns: period, class, teacher, and room
@@ -85,7 +84,7 @@ Once the environment is set up, and you're ready to code...
     - `title`
 * Other required tags (see minimum #)
     - `h1` -> one
-    - `h2` -> two
+    - `h2` or `thead` -> two
     - `table` -> two
     - `tr`  -> at least 6 per table (one for the header, and one for each period)
     - `th`  -> at least 4 per table (in the first `tr`)
@@ -95,6 +94,7 @@ Once the environment is set up, and you're ready to code...
 * No HTML errors are allowed
 
 ### CSS Requirements
+* Do NOT use style attributes in your HTML - only use a style tag in the head or an external stylesheet.
 * Colors:
     - ALL COLORS must meet [WebAIM color contrast](https://webaim.org/resources/contrastchecker/) goals at the following levels:
         * Headings must at least meet ***"WCAG AA"*** rating
