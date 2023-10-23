@@ -43,17 +43,16 @@ Once the environment is set up, and you're ready to code...
 2. Follow teacher instructions on creating your web page.
 3. Be sure to name your file in the title tag as well as in the body with an `h1` tag.
 4. Read the [list of required elements](#required-elements) to make sure you meet minimum requirements.
-4. Create an html table using the `table` tag.
-5. Make sure each section has a section title using the `h2` element.
-7. **In the *About Me* section...**
-    * add at least 3 paragraphs using the `p` tag.
-    * Add some text formatting.
-    * Optionally, you may wish to work a link or two into your paragraphs (just know that you do need at least 2 links).
-8.  **In the *My Favorites* section...**
-    * Add an introductory paragraph about your favorites.
-    * Add one or more lists (bullet or numbered).
-    * For each list, include at least 3 list items (`li`)
-9. You may leave the ***My Schedule*** empty for now, but just know that you will be adding a table.
+5. You will create two tables each with a heading labeling it (A Day and B Day) using the `h2` tag.
+6. Add a table under head heading (`table`)
+7. Be sure to label the top row of cells using the `th` tag.
+8. Be sure to add the following column headers:
+    * Period
+    * Class
+    * Teacher
+    * Room number
+9. Add a row for each period of the day.
+10. Include a row for lunch that spans across all the columns.
 
 *NOTE: as you are codign your page, be sure to check your page for errors using the [W3C File Upload Validator](https://validator.w3.org/#validate_by_upload)*
 
