@@ -49,9 +49,15 @@ def condense_the_rules(rules):
     condensed = []
     for rule in rules:
         file, sel, prop, val = rule
-        color = {}
-        background = {}
-        declaration = get_bg_or_color(prop)
+        color = {
+            "type": "color",
+            "declaration": {}
+        }
+        background = {
+            "type": "background",
+            "declaration": {}
+        }
+        declaration = get_bg_or_color(prop, val)
         if declaration.get("type") == "color":
             color = declaration
         elif declaration.get("type") == "background":
@@ -63,18 +69,26 @@ def condense_the_rules(rules):
                 cur_file, cur_sel, cur_col, cur_bg_col, cur_val = rule
                 if file == cur_file and sel == cur_sel:
                     # add the property that is missing (if it is missing)
-                    print("It's time to work.")
+                    if not cur_col.get("declaration"):
+                        # color is missing add it if we have it
+                        if declaration.get("type") == "color":
+                            rule[2]["declaration"] = declaration.get(
+                                "declaration")
+                    if not cur_bg_col.get("declaration"):
+                        if declaration.get("type") == "background":
+                            rule[3]["declaration"] = declaration.get(
+                                "declaration")
 
 
-def get_bg_or_color(prop):
+def get_bg_or_color(prop, val):
     declaration = {"type": {},
                    "declaration": {}}
     if prop == "color":
         declaration["type"] = "color"
-        declaration["declaration"] = {"color": prop}
+        declaration["declaration"] = {"color": val}
     if "background" in prop:
         declaration["type"] = "background"
-        declaration["declaration"] = {"background": prop}
+        declaration["declaration"] = {"background": val}
     return declaration
 
 
