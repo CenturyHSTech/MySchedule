@@ -41,7 +41,41 @@ def get_all_color_rules():
                                 value = background_color
                         all_the_rules.append((filename, selector, property,
                                               value))
+        all_the_rules = condense_the_rules(all_the_rules)
     return all_the_rules
+
+
+def condense_the_rules(rules):
+    condensed = []
+    for rule in rules:
+        file, sel, prop, val = rule
+        color = {}
+        background = {}
+        declaration = get_bg_or_color(prop)
+        if declaration.get("type") == "color":
+            color = declaration
+        elif declaration.get("type") == "background":
+            background = declaration
+        if not condensed:
+            condensed.append([file, sel, color, background, val])
+        else:
+            for rule in condensed:
+                cur_file, cur_sel, cur_col, cur_bg_col, cur_val = rule
+                if file == cur_file and sel == cur_sel:
+                    # add the property that is missing (if it is missing)
+                    print("It's time to work.")
+
+
+def get_bg_or_color(prop):
+    declaration = {"type": {},
+                   "declaration": {}}
+    if prop == "color":
+        declaration["type"] = "color"
+        declaration["declaration"] = {"color": prop}
+    if "background" in prop:
+        declaration["type"] = "background"
+        declaration["declaration"] = {"background": prop}
+    return declaration
 
 
 def get_background_color(declaration):
