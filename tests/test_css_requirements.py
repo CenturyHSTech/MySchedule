@@ -32,15 +32,14 @@ def get_all_color_rules():
                         filename = file.get("file")
                         selector = ruleset.selector
                         value = declaration.value
-                        if property == "background":
-                            background_color = get_background_color(
-                                declaration)
-                            if not background_color:
-                                continue
-                            else:
-                                value = background_color
-                        all_the_rules.append((filename, selector, property,
-                                              value))
+                        color = "color = "
+                        background = "background = "
+                        if "background" in property:
+                            background += value
+                        if property == "color":
+                            color += value
+                        all_the_rules.append((filename, selector, color,
+                                              background))
         all_the_rules = condense_the_rules(all_the_rules)
     return all_the_rules
 
@@ -48,36 +47,23 @@ def get_all_color_rules():
 def condense_the_rules(rules):
     condensed = []
     for rule in rules:
-        file, sel, prop, val = rule
-        color = {
-            "type": "color",
-            "declaration": {}
-        }
-        background = {
-            "type": "background",
-            "declaration": {}
-        }
-        declaration = get_bg_or_color(prop, val)
-        if declaration.get("type") == "color":
-            color = declaration
-        elif declaration.get("type") == "background":
-            background = declaration
+        file, sel, color, background = rule
         if not condensed:
-            condensed.append([file, sel, color, background, val])
+            condensed.append([file, sel, color, background])
         else:
-            for rule in condensed:
-                cur_file, cur_sel, cur_col, cur_bg_col, cur_val = rule
-                if file == cur_file and sel == cur_sel:
-                    # add the property that is missing (if it is missing)
-                    if not cur_col.get("declaration"):
-                        # color is missing add it if we have it
-                        if declaration.get("type") == "color":
-                            rule[2]["declaration"] = declaration.get(
-                                "declaration")
-                    if not cur_bg_col.get("declaration"):
-                        if declaration.get("type") == "background":
-                            rule[3]["declaration"] = declaration.get(
-                                "declaration")
+            modified = False
+            for row in condensed:
+                if file == row[0] and sel == row[1]:
+                    # update the current row then skedaddle
+                    if len(background) > 13:
+                        row[3] = background
+                    if len(color) > 8:
+                        row[2] = color
+                    modified = True
+                    break
+            if not modified:
+                condensed.append([file, sel, color, background])
+    return condensed
 
 
 def get_bg_or_color(prop, val):
