@@ -2,128 +2,34 @@
 Test CSS Requirements.
 """
 import pytest
-import re
+import file_clerk.clerk as clerk
 from webcode_tk import css_tools as css
 from webcode_tk import color_tools
 from webcode_tk import html_tools as html
-from file_clerk import clerk
 
-
-style_tag_re = r'<(\w+)\s[^>]*?style=([\"|\']).*?\2\s?[^>]*?(\/?)>'
 project_path = "project/"
 html_files = html.get_all_html_files(project_path)
 styles_by_html_files = css.get_styles_by_html_files(project_path)
-global_color_rules = css.get_global_colors(project_path)
+global_color_rules = []
+for file in html_files:
+    global_color_rules.append(css.get_global_colors(file))
 global_color_contrast_tests = []
 no_style_attribute_tests = []
 
 
-def get_all_color_rules():
-    all_the_rules = []
-    for file in styles_by_html_files:
-        stylesheets = file.get("stylesheets")
-        for sheet in stylesheets:
-            for ruleset in sheet.rulesets:
-                declaration_block = ruleset.declaration_block
-                declarations = declaration_block.declarations
-                for declaration in declarations:
-                    property = declaration.property
-                    if property == "color" or "background" in property:
-                        filename = file.get("file")
-                        selector = ruleset.selector
-                        value = declaration.value
-                        color = "color = "
-                        background = "background = "
-                        if "background" in property:
-                            background += value
-                        if property == "color":
-                            color += value
-                        all_the_rules.append((filename, selector, color,
-                                              background))
-        all_the_rules = condense_the_rules(all_the_rules)
-    return all_the_rules
-
-
-def condense_the_rules(rules):
-    condensed = []
-    for rule in rules:
-        file, sel, color, background = rule
-        if not condensed:
-            condensed.append([file, sel, color, background])
-        else:
-            modified = False
-            for row in condensed:
-                if file == row[0] and sel == row[1]:
-                    # update the current row then skedaddle
-                    if len(background) > 13:
-                        row[3] = background
-                    if len(color) > 8:
-                        row[2] = color
-                    modified = True
-                    break
-            if not modified:
-                condensed.append([file, sel, color, background])
-    return condensed
-
-
-def get_bg_or_color(prop, val):
-    declaration = {"type": {},
-                   "declaration": {}}
-    if prop == "color":
-        declaration["type"] = "color"
-        declaration["declaration"] = {"color": val}
-    if "background" in prop:
-        declaration["type"] = "background"
-        declaration["declaration"] = {"background": val}
-    return declaration
-
-
-def get_background_color(declaration):
-    values = declaration.value.split()
-    for val in values:
-        color = color_tools.is_color_value(val)
-        if color:
-            return val
-        is_keyword = val in color_tools.color_keywords.get_all_keywords()
-        if is_keyword:
-            return val
-    return None
-
-
-all_color_rules = get_all_color_rules()
-
-
-def set_global_color_contrast(global_color_rules, global_color_contrast_tests,
-                              file):
-    goal = "Normal AAA"
-    rules = global_color_rules.get(file)
-    if len(rules) == 1:
-        rule = rules[0]
-        bg = rule.get("background-color")
-        bg = color_tools.get_hex(bg)
-        color = rule.get("color")
-        color = color_tools.get_hex(color)
-    if not bg or not color:
-        passes = False
-    else:
-        passes = color_tools.passes_color_contrast(goal, bg, color)
-    global_color_contrast_tests.append((file, rule, goal, passes))
+def get_all_color_rule_results():
+    color_rule_results = css.get_project_color_contrast(project_path)
+    return color_rule_results
 
 
 def set_style_attribute_tests(path):
-    html_code = clerk.file_to_string(path)
-    tags_with_style_attrs = re.findall(style_tag_re, html_code)
-    if not tags_with_style_attrs:
-        no_style_attribute_tests.append((path, "All good", True))
-    for tag in tags_with_style_attrs:
-        element = tag[0]
-        no_style_attribute_tests.append((path, element, False))
-
-
-for file in html_files:
-    set_global_color_contrast(global_color_rules, global_color_contrast_tests,
-                              file)
-    set_style_attribute_tests(file)
+    results = []
+    for file in html_files:
+        data = html.get_style_attribute_data(file)
+        if data:
+            for datum in data:
+                results.append(datum)
+    return results
 
 
 def get_unique_font_families(project_folder):
@@ -167,10 +73,79 @@ def get_font_family_data(font_tests):
     return rules_data
 
 
+def get_table_colors_applied():
+    filename = all_color_data[0][0]
+    table_colors = []
+    colors_applied = False
+    for row in all_color_data:
+        current_file = row[0]
+        if current_file != filename:
+            table_colors.append((filename, colors_applied))
+            filename = current_file
+            colors_applied = False
+        selector = row[1]
+        if "table" not in selector:
+            continue
+        color = row[3]
+        bg_color = row[4]
+        if color and bg_color:
+            colors_applied = True
+            table_colors.append((current_file, colors_applied))
+
+
+def set_colors_applied_to_links(styles_by_file):
+    results = []
+    for file in styles_by_file:
+        filename = file.get("file")
+        stylesheets = file.get("stylesheets")
+        for sheet in stylesheets:
+            selector_present = False
+            possible_selectors = sheet.selectors
+            has_a = css.file_applies_property_by_selector(
+                filename, "a", "color")
+            if has_a:
+                print("it applies an anchor...maybe")
+            for selector in possible_selectors:
+                if "a" in selector:
+                    selector_present = True
+        results.append((filename, selector_present))
+
+
 font_families_tests = get_unique_font_families(project_path)
 font_rules_results = get_font_rules_data(font_families_tests)
 font_selector_results = get_font_selector_data(font_families_tests)
 font_family_results = get_font_family_data(font_families_tests)
+all_color_rules_results = get_all_color_rule_results()
+style_attributes_data = set_style_attribute_tests(project_path)
+colors_applied_to_links = set_colors_applied_to_links(styles_by_html_files)
+
+
+@pytest.fixture
+def project_folder():
+    return project_path
+
+
+@pytest.fixture
+def all_color_data():
+    return all_color_rules_results
+
+
+@pytest.mark.parametrize("file,tag,value", style_attributes_data)
+def test_files_for_style_attribute_data(file, tag, value):
+    results = f"Tag: <{tag}> from '{file}' has a style attribute"
+    assert not results
+
+
+def test_files_for_has_style_attributes(project_folder):
+    results = "No style attributes found"
+    expected = results
+    html_files = html.get_all_html_files(project_folder)
+    for file in html_files:
+        has_style_attribute = html.has_style_attribute_data(file)
+        if has_style_attribute:
+            filename = clerk.get_file_name(file)
+            results = f"{filename} has style attributes"
+    assert expected == results
 
 
 @pytest.mark.parametrize("file,rule,goal,expected",
@@ -202,6 +177,6 @@ def test_files_for_2_font_families_max(file, passes_font_families):
     assert passes_font_families
 
 
-@pytest.mark.parametrize("file,element,passes", no_style_attribute_tests)
-def test_for_no_style_attributes(file, element, passes):
-    assert passes
+def test_files_for_table_colors(project_folder):
+    css.file_applies_property_by_selector()
+    assert False

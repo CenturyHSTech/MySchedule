@@ -19,7 +19,7 @@ def files():
 
 
 @pytest.mark.parametrize("element,num", required_table_elements)
-def test_files_for_required_list_elements(element, num, files):
+def test_files_for_required_table_elements(element, num, files):
     if not files:
         assert False
     for file in files:

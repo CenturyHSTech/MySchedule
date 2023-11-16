@@ -100,7 +100,7 @@ Once the environment is set up, and you're ready to code...
         * Headings must at least meet ***"WCAG AA"*** rating
         * Body text (table content and links included) must meet ***"WCAG AAA"*** rating
     - Apply a **background color** to the page (through the body or html)
-    - Apply a **color** to the text (through the body)
+    - Apply a **color** to the text (through the body or html)
     - Apply a **color** to hyperlinks (to both the link and visited - hover is optional)
     - Apply a **background color AND color** to one or more of the following elements: 
         * `table`, 
