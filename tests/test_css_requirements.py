@@ -93,31 +93,28 @@ def get_table_colors_applied():
             table_colors.append((current_file, colors_applied))
 
 
-def set_colors_applied_to_links(styles_by_file):
-    results = []
-    for file in styles_by_file:
-        filename = file.get("file")
-        stylesheets = file.get("stylesheets")
-        for sheet in stylesheets:
-            selector_present = False
-            possible_selectors = sheet.selectors
-            has_a = css.file_applies_property_by_selector(
-                filename, "a", "color")
-            if has_a:
-                print("it applies an anchor...maybe")
-            for selector in possible_selectors:
-                if "a" in selector:
-                    selector_present = True
-        results.append((filename, selector_present))
+def prep_global_color_tests(global_color_contrast_tests,
+                            global_color_rules):
+    for rule in global_color_rules:
+        path = list(rule.keys())[0]
+        file = path.split("/")[-1]
+        data = rule[path]
+        ratio = data.get("contrast_ratio")
+        passes = data.get("passes_normal_aaa")
+        global_color_contrast_tests.append(
+            (file, ratio, passes)
+        )
 
 
+prep_global_color_tests(global_color_contrast_tests,
+                        global_color_rules)
 font_families_tests = get_unique_font_families(project_path)
 font_rules_results = get_font_rules_data(font_families_tests)
 font_selector_results = get_font_selector_data(font_families_tests)
 font_family_results = get_font_family_data(font_families_tests)
 all_color_rules_results = get_all_color_rule_results()
 style_attributes_data = set_style_attribute_tests(project_path)
-colors_applied_to_links = set_colors_applied_to_links(styles_by_html_files)
+link_colors = css.get_link_color_data(project_path)
 
 
 @pytest.fixture
@@ -128,6 +125,11 @@ def project_folder():
 @pytest.fixture
 def all_color_data():
     return all_color_rules_results
+
+
+@pytest.fixture
+def link_color_details():
+    return link_colors
 
 
 @pytest.mark.parametrize("file,tag,value", style_attributes_data)
@@ -180,3 +182,23 @@ def test_files_for_2_font_families_max(file, passes_font_families):
 def test_files_for_table_colors(project_folder):
     css.file_applies_property_by_selector()
     assert False
+
+
+def test_link_color_details_for_links_targeted(link_color_details):
+    assert link_color_details
+
+
+@pytest.mark.parametrize("file,sel,goal,col,bg,ratio,passes",
+                         link_colors)
+def test_link_color_details_for_passing_color_contrast(file, sel, goal,
+                                                       col, bg, ratio,
+                                                       passes):
+    filename = file.split("/")[-1]
+    if passes:
+        results = f"Color contrast for {sel} in {filename} passes at {ratio}"
+        expected = results
+        assert results == expected
+    else:
+        results = f"Color contrast for {sel} in {filename} fails at {ratio}"
+        expected = f"Color contrast for {sel} in {filename} passes."
+        assert results == expected
