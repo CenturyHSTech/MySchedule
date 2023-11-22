@@ -84,9 +84,8 @@ Once the environment is set up, and you're ready to code...
     - `title`
 * Other required tags (see minimum #)
     - `h1` -> one
-    - `h2` or `thead` -> two
-    - `table` -> two
-    - `tr`  -> at least 6 per table (one for the header, and one for each period)
+    - `table` -> one or two (depends on )
+    - `tr`  -> at least 6 per table (one for the header, and one for each period, and one for lunch)
     - `th`  -> at least 4 per table (in the first `tr`)
     - `td` -> at least 16 per table (4 for each `tr` after the 1st.) 
 
@@ -100,7 +99,7 @@ Once the environment is set up, and you're ready to code...
         * Headings must at least meet ***"WCAG AA"*** rating
         * Body text (table content and links included) must meet ***"WCAG AAA"*** rating
     - Apply a **background color** to the page (through the body or html)
-    - Apply a **color** to the text (through the body)
+    - Apply a **color** to the text (through the body or html)
     - Apply a **color** to hyperlinks (to both the link and visited - hover is optional)
     - Apply a **background color AND color** to one or more of the following elements: 
         * `table`, 

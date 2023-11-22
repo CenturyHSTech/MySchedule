@@ -10,21 +10,11 @@ Put your html file/s in here.
     - `title`
 * Other required tags (see minimum #)
     - `h1` -> one per page (ONLY)
-    - `h2` -> at least 3 per page
-    - `p`  -> at least 4 per page
-    - `a`  -> at least 2 per page
-* Formatting Elements
-    - `strong` or `b` -> at least 2 per page (you can choose which one)
-    - `em` or `i`     -> at least 2 per page (you choose which one)
-
-## Minimum Image Requirements
-* At least 3 `figure` tags
-* At least 1 `img` per `figure`
-* 1 `figcaption` per `figure`
-
-## Minimum List Requirements
-* At least 1 list (you can choose between `ol` or `ul`)
-* At least 3 list items per list
+    - `h2` or `caption` -> 2
+    - `table` -> 2
+    - `tr` -> at least 12
+    - `th` -> 8 (4 per table)
+    - `td` -> 34 (16 per class, plus 1 for each lunch)
 
 
 ## Validity Requirements
