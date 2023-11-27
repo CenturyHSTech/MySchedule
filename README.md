@@ -60,15 +60,15 @@ Once the environment is set up, and you're ready to code...
     * The lunch row should merge across all of the columns.
     * You provide a border around...
         - the table itself
-        - each cell
+        - each cell (goes for both `th` and `td` tags)
     * You provide a different background color and color for the table than the entire page.
     * You provide a different background color and color for the table headers.
     * Any additional colors are optional, but when applied, they must meet color contrast requirements.
-    * You provide a border around the table and around each row &/or cell.
     * All cells and headers have padding applied.
     * No matter what styles you provide...
         - ***everything must be readable***
         - ***no text should be touching a border or edge of the screen***
+8. For more specific information on how to pass test, please refer to the README file in the project folder.
 
 *NOTE: as you are codign your page, be sure to check your page for errors using the [W3C File Upload Validator](https://validator.w3.org/#validate_by_upload)*
 
