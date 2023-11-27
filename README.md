@@ -1,4 +1,4 @@
-# MySchedule
+# My Schedule
 Demonstrate your ability to mark up and style tables.
 
 ***NOTE: this is part 1 of an on-going project***
@@ -34,7 +34,7 @@ Getting your project up and running in VS Code.
 16. If you want to see if you are doing it right, check your code by typing `pytest`.
 17. Once you think you're done, save your changes, make one last commit and push, and turn in your assignment by clicking the "Mark as Done" button.
 
-**[Environment Set Up](#environment-set-up)** | **[Coding Your Project](#coding-your-project)** | **[Required Elements](#required-elements)** | **[Back to the top](#about-me-page-html-part-1-project)**
+**[Environment Set Up](#environment-set-up)** | **[Coding Your Project](#coding-your-project)** | **[Required Elements](#required-elements)** | **[Back to the top](#my-schedule)**
 
 ## Coding Your Project
 Once the environment is set up, and you're ready to code...
@@ -73,7 +73,7 @@ Once the environment is set up, and you're ready to code...
 *NOTE: as you are codign your page, be sure to check your page for errors using the [W3C File Upload Validator](https://validator.w3.org/#validate_by_upload)*
 
 
-**[Environment Set Up](#environment-set-up)** | **[Coding Your Project](#coding-your-project)** | **[Required Elements](#required-elements)** | **[Back to the top](#about-me-page-html-part-1-project)**
+**[Environment Set Up](#environment-set-up)** | **[Coding Your Project](#coding-your-project)** | **[Required Elements](#required-elements)** | **[Back to the top](#my-schedule)**
 
 ## Required Elements
 ### HTML Main Requirements
@@ -101,12 +101,12 @@ Once the environment is set up, and you're ready to code...
     - Apply a **background color** to the page (through the body or html)
     - Apply a **color** to the text (through the body or html)
     - Apply a **color** to hyperlinks (to both the link and visited - hover is optional)
-    - Apply a **background color AND color** to one or more of the following elements: 
+    - Apply a **background color AND/OR color** to one or more of the following elements and make sure it passes color contrast: 
         * `table`, 
         * `tr`, OR
         * `th` and `td` (NOTE: if set it on one of these, you MUST set it on both)
     - Apply a **styled border** around the table
-    - Apply a **thinner border** around the cells
+    - Apply a **thinner border** around the cells (`td` and `th`)
     - Style the `th` elements differently from the `td` elements
     - Add **padding** to all `th` and `td` elements.
     - [OPTIONAL] add border-collapse to remove the gaps between borders (it almost always looks better)
@@ -114,4 +114,4 @@ Once the environment is set up, and you're ready to code...
 NOTE: to check for errors, be sure to upload your HTML file to the [W3C File Upload Validator](https://validator.w3.org/#validate_by_upload)
 
 
-**[Environment Set Up](#environment-set-up)** | **[Coding Your Project](#coding-your-project)** | **[Required Elements](#required-elements)** | **[Back to the top](#about-me-page-html-part-1-project)**
+**[Environment Set Up](#environment-set-up)** | **[Coding Your Project](#coding-your-project)** | **[Required Elements](#required-elements)** | **[Back to the top](#my-schedule)**
