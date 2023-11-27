@@ -10,7 +10,7 @@ repos:
     hooks:
     -   id: poetry-check
     -   id: poetry-lock
-    -   id: poetry-export 
-        args: ["-f", "requirements.txt"]
+    -   id: poetry-export
+        args: ["-f", "requirements.txt", "--output", "requirements.txt"]
         verbose: true
     -   id: poetry-install
