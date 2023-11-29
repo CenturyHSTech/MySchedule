@@ -125,6 +125,24 @@ def prep_additional_table_styles(files):
         possible_td_selectors = html.get_possible_selectors_by_tag(
             filepath, "td"
         )
+        possible_multiple_selectors = []
+        for selector in possible_table_selectors:
+            for th in possible_th_selectors:
+                combined = selector + ", " + th
+                if combined not in possible_multiple_selectors:
+                    possible_multiple_selectors.append(combined)
+                for td in possible_td_selectors:
+                    combined = combined + ", " + td
+                    if combined not in possible_multiple_selectors:
+                        possible_multiple_selectors.append(combined)
+            for td in possible_td_selectors:
+                combined = selector + ", " + td
+                if combined not in possible_multiple_selectors:
+                    possible_multiple_selectors.append(combined)
+                for th in possible_th_selectors:
+                    combined = combined + ", " + th
+                    if combined not in possible_multiple_selectors:
+                        possible_multiple_selectors.append(combined)
         for sheet in stylesheets:
             td_styles = ""
             th_styles = ""
@@ -154,6 +172,24 @@ def prep_additional_table_styles(files):
                     td_styles = rule.declaration_block.text
                     td_padding = "padding" in td_styles
                     td_border = "border" in td_styles
+
+                for group in possible_multiple_selectors:
+                    if selector == group:
+                        group_styles = rule.declaration_block.text
+                        # only check the styles if they have not
+                        # previously been applied (it doesn't hurt to
+                        # change False to False, but it would hurt to
+                        # go from True to False)
+                        if not table_border:
+                            table_border = "border" in group_styles
+                        if not td_padding:
+                            td_padding = "padding" in group_styles
+                        if not td_border:
+                            td_border = "border" in group_styles
+                        if not th_padding:
+                            th_padding = "padding" in group_styles
+                        if not th_border:
+                            th_border = "border" in group_styles
 
             # Check table border
             if table_border:
