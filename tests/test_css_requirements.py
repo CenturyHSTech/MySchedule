@@ -125,7 +125,9 @@ def prep_additional_table_styles(files):
         possible_td_selectors = html.get_possible_selectors_by_tag(
             filepath, "td"
         )
-        possible_multiple_selectors = []
+        possible_multiple_selectors = ["table,th,td", "table,td,th",
+                                       "table,th", "table,td", "th,td",
+                                       "td,th"]
         for selector in possible_table_selectors:
             for th in possible_th_selectors:
                 combined = selector + ", " + th
@@ -170,8 +172,10 @@ def prep_additional_table_styles(files):
                 # check td styles (padding & overall)
                 if selector in possible_td_selectors:
                     td_styles = rule.declaration_block.text
-                    td_padding = "padding" in td_styles
-                    td_border = "border" in td_styles
+                    if not td_padding:
+                        td_padding = "padding" in td_styles
+                    if not td_border:
+                        td_border = "border" in td_styles
 
                 for group in possible_multiple_selectors:
                     if selector == group:
